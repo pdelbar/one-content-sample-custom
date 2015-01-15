@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scheme name="article">
+	<info>
+		<title>Joomla articles</title>
+	</info>
+
+	<attributes>
+		<attribute name="id" type="int" identity="true" />
+		<attribute name="state" type="int" />
+        <attribute name="title" type="string" />
+        <attribute name="alias" type="string" />
+		<attribute name="introduction" column="introtext" type="string" />
+		<attribute name="fulltext" type="string" />
+		<attribute name="created" type="datetime" />
+	</attributes>
+
+	<relations>
+	</relations>
+
+	<tasks>
+		<task name="edit;remove;update">
+			<conditions>
+				<condition>
+					<or>
+						<rule type="jbackend" />
+						<rule type="frontadmin" />
+					</or>
+				</condition>
+			</conditions>
+		</task>
+	</tasks>
+
+	<behaviors>
+        <behavior name="published" attribute="published" foo="bar"/>
+        <behavior name="slug" createFrom="title" />
+	</behaviors>
+
+    <routings>
+        <routing alias="iets" task="iets" view="detail" useid="true" aliasField="alias" />
+        <routing alias="leesmij" task="detail" view="detail" useid="true" aliasField="alias" />
+        <routing alias="allemaal" task="list" view="list" useid="false"  />
+        <routing alias="lijstje" task="list" view="lijst" useid="false"  />
+    </routings>
+
+	<connection name="joomla" table="#__content" />
+</scheme>

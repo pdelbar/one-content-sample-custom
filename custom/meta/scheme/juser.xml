@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scheme name="juser">
+  <info>
+    <title>Joomla Users</title>
+    <description></description>
+    <image></image>
+    <options>internal</options>
+  </info>
+
+  <attributes>
+    <attribute name="id" type="int" identity="true" />
+    <attribute name="name" type="string" />
+    <attribute name="username" type="string" />
+    <attribute name="email" type="string" />
+    <attribute name="password" type="string" />
+    <attribute name="usertype" type="string" />
+    <attribute name="block" type="int" />
+    <attribute name="sendEmail" type="int" />
+    <attribute name="registerDate" type="datetime" />
+    <attribute name="lastvisitDate" type="datetime" />
+    <attribute name="activation" type="string" />
+    <attribute name="params" type="text" />
+    <attribute name="lastResetTime" type="datetime" />
+    <attribute name="resetCount" type="int" />
+  </attributes>
+
+  <tasks>
+    <task name="edit;remove;update">
+      <conditions>
+        <condition>
+          <rule type="jbackend" />
+        </condition>
+      </conditions>
+    </task>
+  </tasks>
+
+  <behaviors>
+  </behaviors>
+  <connection name="joomla" table="#__users" />
+
+</scheme>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<redirects>
+	<redirect task="save" alias="update,insert"><![CDATA[ scheme=::scheme::&task=list&view=mgr_list&Itemid=514 ]]></redirect>
+	<redirect task="cancel"><![CDATA[  scheme=::scheme::&task=list&view=mgr_list&Itemid=514 ]]></redirect>
+	<redirect task="formerror"><![CDATA[ scheme=::scheme::&task=detail&view=mgr_detail&Itemid=514&id=::ID:: ]]></redirect>
+	<redirect task="remove" alias="delete"><![CDATA[ scheme=::scheme::&task=list&view=mgr_list&Itemid=514 ]]></redirect>
+</redirects>

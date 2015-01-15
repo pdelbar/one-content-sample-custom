@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view name="list">
+    <columns>
+        <column name="title" label="Title" linkdetail="1" filter="1" />
+        <column label="Alias" class="small" ><![CDATA[
+           {= model->alias}
+           <br/>
+           <span style="color: #cccccc;">created {= model->created}</span>
+        ]]></column>
+        <column label="Published" ><![CDATA[
+           {if model->state}<i class="icon-publish"></i>{endif}
+        ]]></column>
+    </columns>
+</view>
+

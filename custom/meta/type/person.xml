@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<type name="person">
+	<attributes>
+		<attribute name="first" type="string" />
+		<attribute name="last" type="string" />
+	</attributes>
+</type>

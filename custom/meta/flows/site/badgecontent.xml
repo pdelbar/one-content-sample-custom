@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<redirects>
+	<redirect task="save" alias="update,insert"><![CDATA[ scheme=::scheme::&task=badgeredirect&id=::ID::]]></redirect>
+	<redirect task="cancel"><![CDATA[  scheme=::scheme::&task=badgeredirect&id=::ID:: ]]></redirect>
+	<redirect task="formerror"><![CDATA[ scheme=::scheme::&task=edit&view=edit&Itemid=516&id=::ID:: ]]></redirect>
+	<redirect task="remove" alias="delete"><![CDATA[ scheme=::scheme::&task=badgeredirect&id=::ID:: ]]></redirect>
+</redirects>

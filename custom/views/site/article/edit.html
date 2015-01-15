@@ -1,0 +1,187 @@
+{include edit_master.html}
+
+{section PREFIX}
+  {set cancelurl = joomla:route("index.php?Itemid=".itemid."&option=com_one&task=list&view=list&scheme=article")}
+
+  {if intval(model->id) > 0}
+    {do joomla:addToBreadcrumb("Edit article '".model->name."'")}
+    {set posturl = joomla:route('index.php?option=com_one&scheme='.scheme.'&task=save&id='.model->id)}
+  {else}
+    {do joomla:addToBreadcrumb("New article")}
+{endif}
+{set langs = manager:getLanguages()}
+{endsection}
+
+
+{section TITLE}
+  {if intval(model->id) > 0}
+    <h1>Edit article '{= model->name}'</h1>
+  {else}
+    <h1>New article</h1>
+  {endif}
+{endsection}
+
+
+{section HEADER}
+<div class="row-fluid">		
+
+  <div class="control-group span6">
+    <label class="control-label" for="name">Name</label>
+    <input type="text" class="span12" id="name" name="{= scheme}Form[name]" placeholder="Name" {if intval(model->id) > 0}value="{= model->name}"{endif}>
+  </div>
+  <div class="control-group span3 pull-right">
+    <div class="well">
+      <label class="checkbox">
+        <input  type="checkbox" value="1" id="published" name="{= scheme}Form[published]" {if intval(model->id) > 0}{if model->published}checked{endif}{endif}> Publish article
+      </label>
+      {if model->date_created}<small class="muted">Created : {= model->date_created}</small><br/>{endif}
+      {if model->date_updated}<small class="muted">Updated : {= model->date_updated}</small><br/>{endif}
+    </div>
+  </div>
+</div>
+
+{endsection}
+
+{section BODY}
+
+  {set addcontenturl = "index.php?Itemid=".itemid."&scheme=articlecontent&task=show&view=edit&mid=".model->id}
+  
+<div class="span12">
+
+  <ul class="nav nav-tabs" id="myTab">
+    <li class="active"><a href="#content">Content</a></li>
+    <li><a href="#media">Media{if model->image} <i class="icon icon-check-sign"></i>{endif}</a></li>
+  </ul>
+
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="content">
+      <div class="row-fluid">
+      {if intval(model->id) > 0}
+        {set contents = model->articlecontents}
+        {comment if count(contents)}
+        <table class="table table-condensed table-hover">
+          <thead>
+            <tr>
+              <th width="32"></th>
+              <th width="64">Thumb</th>
+              <th colspan="2">Subject</th>
+              <th width="130"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {set translations = contents}
+  					{loop langs l}
+              <tr>
+                  {set langfound = 0}
+                  {loop translations cc}
+                    {if cc->language == l->sef}
+                      {set langfound = 1}
+                      {set c = cc}
+                    {endif}
+                  {endloop}
+                  {if langfound == 1}
+                  	 {set editcontenturl = joomla:route("index.php?Itemid=".itemid."&scheme=articlecontent&task=detail&view=edit&mid=".model->id . "&id=". c->id)}
+                  	{set removecontenturl = joomla:route("index.php?Itemid=".itemid."&scheme=articlecontent&option=com_one&task=remove&id=".c->id."&mid=".model->id)}
+
+                    <td width="25"><span class="label label-success" >{= strtoupper(l->sef)}</span></td>
+                    <td>
+                      {if c->image}
+                        <a class="thumbtt" href="#" data-placement="right" data-toggle="tooltip" title="<img src='{= joomla:livesite() . c->image}' style='width: 320px;'/>" data-html="true">
+                          <img src="{= joomla:livesite() . c->image}" style="width: 64px;"/>
+                        </a>
+                      {else}
+                        <img src="{= joomla:livesite() . 'templates/manager/js/holder.js/62x38/apopo/text:see article'}" style="border: 1px solid #DDD;width: 64px;"/>
+                      {endif}
+                    </td>
+                    <td>
+                      <a href="{= editcontenturl}" title="Edit">{= c->title}</a>
+                    </td>
+                    <td>
+                      <div class="btn-group pull-right">
+                        <a class="btn btn-mini btn" href="{= editcontenturl}" title="Edit content"><i class="icon-pencil"></i> Edit</a>
+                        <a class="btn btn-mini btn"><i class="icon-white icon-eye-open"></i> Preview</a>
+                        <a class="btn btn-mini btn-danger" title="Delete '{= c->title}'" onclick="confirmDelete('{= removecontenturl}', 'Do you really want to delete this article content ?');" href="#"><i class="icon-remove"></i> Delete</a>
+                      </div>
+                    </td>
+    			{else}
+                    <td width="25"><span class="label label-important" >{= strtoupper(l->sef)}</span></td>
+                    <td></td>
+                    <td colspan=2>
+                      <a href="{= joomla:route(addcontenturl . '&contentlang=' . l->sef)}" class="btn btn-small pull-left" title="Add content"><i class="icon-plus"></i> Create {= strtoupper(l->sef)} content</a>
+                    </td>
+							{endif}
+              </td>
+            </tr>
+					{endloop}
+
+          <tr><td colspan="4"></td></tr>
+
+          </tbody>
+        </table>
+
+      </div>
+      {else}
+      <div class="alert alert-block">
+        Save your article first to add content.
+      </div>
+      {endif}
+    </div>
+    
+    
+    
+    <div class="tab-pane" id="media">
+    
+      <div class="control-group span6">
+          <label class="control-label" for="image">Article image</label>
+          <div class="controls">
+            {if model->image}
+                <div class="alert">
+                  This image will be used in all languages, unless you override it for a specific language.
+              </div>
+              
+            {else}
+                <div class="alert alert-info">
+                  If you choose an image here, it will be used in all languages, unless you override it for a specific language.
+              </div>
+
+            {endif}
+
+            <div class="fileupload fileupload-{if model->image}exists{else}new{endif}" data-provides="fileupload" >
+              <div class="fileupload-new thumbnail" style="width: 320px; height: 200px;"></div>
+              <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 320px; max-height: 200px; line-height: 20px;"><img src="{= joomla:livesite() . model->image}" /></div>
+              <div>
+                <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" id="image" name="image"  /></span>
+                <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="control-group span6">
+        	<div class="controls span9">
+        		<label class="control-label" for="video">Video URL</label>
+        		<input type="text" class="span12" id="video" name="{= scheme}Form[video]" placeholder="Video" {if intval(model->id) > 0}value="{= model->video}"{endif}>
+        	</div>
+        </div>
+    </div>
+  </div>
+  {endsection}
+
+  {section FOOTER}
+          <script>$('.thumbtt').tooltip();</script>
+  {endsection}
+
+  {section SUFFIX}
+	  <script type="text/javascript">
+	    $(document).ready(function() {{
+	        {{
+	            $('#myTab a').click(function(e) {{
+	                {{
+	                    e.preventDefault();
+	                    $(this).tab('show');
+	                  }}
+	              }})
+	          }}
+	      }})
+	  </script>
+  {endsection}

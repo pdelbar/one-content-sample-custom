@@ -1,0 +1,5 @@
+<h1> Lijst van {= count(model)} articles</h1>
+
+{loop model m}
+   {= one:view(m,'li')}
+{endloop}
