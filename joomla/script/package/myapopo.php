@@ -234,7 +234,7 @@ class oneScriptPackageMyapopo extends One_Script_Package {
       $rec->update();
     } else {
       //echo ' / creating new counter';
-      $rec = One_Repository::getInstance('userimpactcounter');
+      $rec = One::make('userimpactcounter');
       $rec->impacttype_id = $ctr->impacttype_id;
       $rec->user_id = $userid;
       $originalAmount = 0;
@@ -279,7 +279,7 @@ class oneScriptPackageMyapopo extends One_Script_Package {
     $badge->update();
     
     // post message
-    $message = One_Repository::getInstance('postmessage');
+    $message = One::make('postmessage');
     $message->user_id = $userid;
 
     $message->title = $content['title'];
@@ -298,7 +298,7 @@ class oneScriptPackageMyapopo extends One_Script_Package {
     // Facebook
     $content['pmlink'] = 'http://www.apopo.org/pm/message/' . $message->alias;
     $content['pmintro'] = strip_tags($content['description']);
-    $message = One_Repository::getInstance('postmessage');
+    $message = One::make('postmessage');
 
     $message->user_id = $userid;
 
@@ -365,7 +365,7 @@ class oneScriptPackageMyapopo extends One_Script_Package {
     $badge->update();
     
     // post message
-    $message = One_Repository::getInstance('postmessage');
+    $message = One::make('postmessage');
     $message->user_id = $userid;
 
     $message->title = $content['title'];
@@ -384,7 +384,7 @@ class oneScriptPackageMyapopo extends One_Script_Package {
     // Facebook
     $content['pmlink'] = 'http://www.apopo.org/pm/message/' . $message->alias;
     $content['pmintro'] = strip_tags($content['description']);
-    $message = One_Repository::getInstance('postmessage');
+    $message = One::make('postmessage');
 
     $message->user_id = $userid;
 

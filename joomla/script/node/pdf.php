@@ -19,7 +19,7 @@ class One_Script_Node_Pdf extends One_Script_Node_Abstract
 		else
 		{
 			$xml = preg_replace( '/&(?![a-z0-9#]+;)/is', '&amp;', $xml );
-			require_once( One::getInstance()->getPath() . DS . '../vendor' . DS . 'genpdf.php' );
+			require_once( One_Config::getInstance()->getPath() . DS . '../vendor' . DS . 'genpdf.php' );
 //			ob_clean();
 //			$document = &JDocument::getInstance( );
 //			$document->setBuffer('');

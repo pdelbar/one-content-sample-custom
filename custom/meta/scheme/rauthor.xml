@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scheme name="rauthor">
+    <info>
+        <title>Author using REST</title>
+    </info>
+
+    <attributes>
+        <attribute name="id" type="int" identity="true"/>
+        <attribute name="name" type="string"/>
+        <attribute name="bio" type="text"/>
+        <attribute name="created" type="datetime"/>
+        <attribute name="updated" type="datetime"/>
+    </attributes>
+
+    <tasks>
+        <task name="edit;remove;update">
+            <conditions>
+                <condition>
+                    <rule type="always"/>
+                </condition>
+            </conditions>
+        </task>
+    </tasks>
+
+    <connection name="myrest" select="authors" selectOne="authors/@" create="authors" update="authors/@" delete="authors/@" />
+</scheme>
+
+

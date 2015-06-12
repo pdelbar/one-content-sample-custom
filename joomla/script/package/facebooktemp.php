@@ -68,7 +68,7 @@ class One_Script_Package_Facebooktemp extends One_Script_Package
 		if($registrationId != 0){
 			$registration = One_Repository::selectOne('registratie', $registrationId);
 		}else{
-			$registration = One_Repository::getInstance('registratie');
+			$registration = One::make('registratie');
 		}
 
 		$registration->voornaam = $user['first_name'];

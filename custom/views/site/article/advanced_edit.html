@@ -1,0 +1,58 @@
+{include edit_master.html}
+
+{section PREFIX}
+  {set cancelurl = joomla:route("index.php?Itemid=".itemid."&option=com_one&task=list&view=list&scheme=article")}
+
+  {if intval(model->id) > 0}
+    {do joomla:addToBreadcrumb("Edit article '".model->title."'")}
+    {set posturl = joomla:route('index.php?option=com_one&scheme='.scheme.'&task=save&id='.model->id)}
+  {else}
+    {do joomla:addToBreadcrumb("New article")}
+{endif}
+{endsection}
+
+
+{section TITLE}
+  {if intval(model->id) > 0}
+    <h1>Edit article '{= model->title}'</h1>
+  {else}
+    <h1>New article</h1>
+  {endif}
+{endsection}
+
+
+{section HEADER}
+<div class="row-fluid">		
+
+  <div class="control-group span6">
+    <label class="control-label" for="name">Title</label>
+    <input type="text" class="span12" id="title" name="{= scheme}Form[title]" placeholder="Title" {if intval(model->id) > 0}value="{= model->title}"{endif}>
+  </div>
+  <div class="control-group span6 pull-right">
+    <div class="well">
+      <label class="checkbox">
+        <input  type="checkbox" value="1" id="state" name="{= scheme}Form[state]" {if intval(model->id) > 0}{if model->state}checked{endif}{endif}> Published
+      </label>
+        <small class="muted">
+            Created by <b>{= model->creator->name}</b>
+            {if model->created}on <b>{= model->created}</b>{endif}
+        </small>
+        <br/>
+    </div>
+  </div>
+</div>
+
+{endsection}
+
+{section BODY}
+
+
+  {endsection}
+
+  {section FOOTER}
+          <script>$('.thumbtt').tooltip();</script>
+  {endsection}
+
+  {section SUFFIX}
+
+  {endsection}

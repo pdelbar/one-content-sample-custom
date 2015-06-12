@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <textfield title="titel" attribute="title" />
+    <submit name="save" label="doeget" />
+</form>

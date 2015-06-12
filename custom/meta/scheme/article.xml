@@ -6,15 +6,16 @@
 
 	<attributes>
 		<attribute name="id" type="int" identity="true" />
-		<attribute name="state" type="int" />
+		<attribute name="state" type="yesno" />
         <attribute name="title" type="string" />
         <attribute name="alias" type="string" />
-		<attribute name="introduction" column="introtext" type="string" />
-		<attribute name="fulltext" type="string" />
+		<attribute name="introduction" column="introtext" type="text" />
+		<attribute name="fulltext" type="text" />
 		<attribute name="created" type="datetime" />
 	</attributes>
 
 	<relations>
+            <relation name="articlecreator" />
 	</relations>
 
 	<tasks>
@@ -31,13 +32,15 @@
 	</tasks>
 
 	<behaviors>
-        <behavior name="published" attribute="published" foo="bar"/>
         <behavior name="slug" createFrom="title" />
+        <behavior name="restable" route="articles" />
 	</behaviors>
 
     <routings>
         <routing alias="iets" task="iets" view="detail" useid="true" aliasField="alias" />
         <routing alias="leesmij" task="detail" view="detail" useid="true" aliasField="alias" />
+        <routing alias="wijzig" task="edit" view="advanced_edit" useid="true" aliasField="alias" />
+        <routing alias="edit" task="edit" view="edit" useid="true" aliasField="alias" />
         <routing alias="allemaal" task="list" view="list" useid="false"  />
         <routing alias="lijstje" task="list" view="lijst" useid="false"  />
     </routings>

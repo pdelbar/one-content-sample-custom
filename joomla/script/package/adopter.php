@@ -18,7 +18,7 @@ class One_Script_Package_Adopter extends One_Script_Package
 			return $extra[0];
     
     // none found, create one
-    $ex = One_Repository::getInstance('juserextra');
+    $ex = One::make('juserextra');
     $ex->user_id = $juserid;
     $ex->mailfrequency = 7;
     $ex->fbpermission = 0;

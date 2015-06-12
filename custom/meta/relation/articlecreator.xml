@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<relation name="articlecreator" connection="joomla">
+	<roles>
+		<role name="articles" scheme="article" cardinality="many" fk="created_by" />
+		<role name="creator" scheme="juser" cardinality="one" />
+	</roles>
+</relation>

@@ -13,35 +13,20 @@ class One_Controller_Article extends One_Controller {
 
     // Get the posted values
     $values = JRequest::getVar('articleForm', NULL, 'post');
-    
+    die(print_r($values));
+
 	// Check if new or edit
     if ($id > 0) {
       $ob = One_Repository::selectOne('article', $id);
-      $image = array('image' => strval($ob->image));
     } else {
-      $ob = One_Repository::getInstance('article');
-      $image = array('image' => '');
+      $ob = One::make('article');
     }
 
     // Fill in the values
-    $ob->name = trim($values['name']);
-    $ob->published = intval($values['published']);
-    $ob->video = trim($values['video']);
+    $ob->title = trim($values['title']);
+    $ob->state = intval($values['state']);
     if ($id == 0)
-      	$ob->date_created = date('Y-m-d H:m:s');
-    $ob->date_updated = date('Y-m-d H:m:s');
-    
-    //create accompanying image and return image path
-    $imageParams = array('width' => 300, 'height' => 0);
-    $uploadedimages = oneScriptPackageImageupload::getUploadedImages('/images/games/news/', $id, $image, $imageParams);
-
-    if (array_key_exists('image', $uploadedimages)) {
-      $ob->image = $uploadedimages['image'];
-    } else {
-      	if ($ob->image && isset($_POST['image']) && ($_POST['image'] == '')) {
-        	$ob->image = '';
-		}
-    }
+      	$ob->created = date('Y-m-d H:m:s');
 
     // Update or insert
     if ($id > 0) {
@@ -52,26 +37,6 @@ class One_Controller_Article extends One_Controller {
 
     // Redirect
     $redirect_url = JRoute::_("index.php?Itemid=" . intval($values['itemid']));
-    header('Location: ' . $redirect_url);
-  }
-
-  
-  // Remove message
-  public function execute_Remove(array $options = array()) {
-    // check to delete all content
-    $id = intval($this->options['id']);
-    $ob = One_Repository::selectOne('article', $id);
-    $contents = $ob->getRelated('articlecontents');
-    
-    foreach ($contents as $content) {
-      $content->delete();
-    }
-    
-    $ob->delete();
-    
-    $itemId = intval(JRequest::getVar('Itemid', 0));
-    
-    $redirect_url = JRoute::_("index.php?Itemid=" . $itemId . '&task=list&view=list');
     header('Location: ' . $redirect_url);
   }
 

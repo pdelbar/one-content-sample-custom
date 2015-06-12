@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connection name="myrest" store="rest" type="rest">
+    <service entrypoint="http://localhost/joomla-one/rest"/>
+</connection>

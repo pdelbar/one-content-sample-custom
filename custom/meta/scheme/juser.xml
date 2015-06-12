@@ -24,7 +24,11 @@
     <attribute name="resetCount" type="int" />
   </attributes>
 
-  <tasks>
+    <relations>
+        <relation name="articlecreator" />
+    </relations>
+
+    <tasks>
     <task name="edit;remove;update">
       <conditions>
         <condition>
