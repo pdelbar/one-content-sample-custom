@@ -6,7 +6,6 @@
 
 	<attributes>
 		<attribute name="id" type="int" identity="true" />
-		<attribute name="state" type="yesno" />
         <attribute name="title" type="string" />
         <attribute name="alias" type="string" />
 		<attribute name="introduction" column="introtext" type="text" />

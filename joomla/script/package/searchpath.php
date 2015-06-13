@@ -1,4 +1,6 @@
 <?php
+
+die('deprecated package dude');
 class oneScriptPackageSearchpath extends One_Script_Package
 {
 	public function add( $path )
