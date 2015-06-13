@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scheme name="native">
+	<info>
+		<title>Native article</title>
+	</info>
+
+	<attributes>
+		<attribute name="id" type="int" identity="true" />
+        <attribute name="title" type="string" />
+        <attribute name="alias" type="string" />
+		<attribute name="introduction" column="introtext" type="text" />
+		<attribute name="fulltext" type="text" />
+		<attribute name="created" type="datetime" />
+	</attributes>
+
+	<relations>
+            <relation name="articlecreator" />
+	</relations>
+
+	<tasks>
+		<task name="edit;remove;update">
+			<conditions>
+				<condition>
+					<or>
+						<rule type="jbackend" />
+						<rule type="frontadmin" />
+					</or>
+				</condition>
+			</conditions>
+		</task>
+	</tasks>
+
+	<behaviors>
+        <behavior name="slug" createFrom="title" />
+        <behavior name="restable" route="articles" />
+	</behaviors>
+
+    <routings>
+        <routing alias="iets" task="iets" view="detail" useid="true" aliasField="alias" />
+        <routing alias="leesmij" task="detail" view="detail" useid="true" aliasField="alias" />
+        <routing alias="wijzig" task="edit" view="advanced_edit" useid="true" aliasField="alias" />
+        <routing alias="edit" task="edit" view="edit" useid="true" aliasField="alias" />
+        <routing alias="allemaal" task="list" view="list" useid="false"  />
+        <routing alias="lijstje" task="list" view="lijst" useid="false"  />
+    </routings>
+
+	<connection name="mysql" table="ap_content" />
+</scheme>

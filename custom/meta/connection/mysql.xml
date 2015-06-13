@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connection name="mysql" store="mysql" type="mysql">
+    <db host="localhost" user="root" password="" database="apopo-platform" />
+</connection>
